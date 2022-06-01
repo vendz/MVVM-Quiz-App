@@ -13,11 +13,13 @@ import kotlinx.coroutines.launch
 class QuestionViewModel(application: Application): AndroidViewModel(application) {
     val allQuestion: LiveData<List<QuestionsModel>>
     val repository: QuestionsRepository
+    val nextQuestion: LiveData<QuestionsModel>
 
     init {
         val dao = QuestionsDatabase.getDatabase(application).getQuestionsDao()
         repository = QuestionsRepository(dao)
         allQuestion = repository.allQuestions
+        nextQuestion = dao.getNextQuestion()
     }
 
     fun addQuestion(question: QuestionsModel) = viewModelScope.launch(Dispatchers.IO) {
@@ -30,5 +32,9 @@ class QuestionViewModel(application: Application): AndroidViewModel(application)
 
     fun deleteQuestion(question: QuestionsModel) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(question)
+    }
+
+    fun deleteAllQuestions() = viewModelScope.launch {
+        repository.deleteAll()
     }
 }

@@ -17,10 +17,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(QuestionViewModel::class.java)
-        viewModel.addQuestion(QuestionsModel(0, "Question 1", "option b", "option a", "option b", "option c", "option d"))
-        viewModel.addQuestion(QuestionsModel(0, "Question 2", "option b", "option a", "option b", "option c", "option d"))
-        viewModel.addQuestion(QuestionsModel(0, "Question 3", "option b", "option a", "option b", "option c", "option d"))
-        viewModel.addQuestion(QuestionsModel(0, "Question 4", "option b", "option a", "option b", "option c", "option d"))
-        viewModel.addQuestion(QuestionsModel(0, "Question 5", "option b", "option a", "option b", "option c", "option d"))
+        viewModel.deleteAllQuestions()
+        viewModel.addQuestion(QuestionsModel( "Question 1", "option b", "option a", "option b", "option c", "option d"))
+        viewModel.addQuestion(QuestionsModel( "Question 2", "option b", "option a", "option b", "option c", "option d"))
+        viewModel.addQuestion(QuestionsModel( "Question 3", "option b", "option a", "option b", "option c", "option d"))
+        viewModel.addQuestion(QuestionsModel("Question 4", "option b", "option a", "option b", "option c", "option d"))
+        viewModel.addQuestion(QuestionsModel("Question 5", "option b", "option a", "option b", "option c", "option d"))
     }
 }

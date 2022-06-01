@@ -17,4 +17,10 @@ interface QuestionsDao {
 
     @Query("SELECT * FROM questionsTable")
     fun getAllQuestions(): LiveData<List<QuestionsModel>>
+
+    @Query("SELECT * FROM questionsTable WHERE isAttempted = 0 ORDER by id LIMIT 1")
+    fun getNextQuestion(): LiveData<QuestionsModel>
+
+    @Query("DELETE FROM questionsTable")
+    suspend fun deleteAllQuestions()
 }

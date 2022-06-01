@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.vandit.mvvmquizapp.R
 import com.vandit.mvvmquizapp.databinding.FragmentMainBinding
 import com.vandit.mvvmquizapp.viewmodel.QuestionViewModel
+import java.util.*
 
 class MainFragment : Fragment() {
     lateinit var binding: FragmentMainBinding
@@ -22,15 +23,15 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewmodel = ViewModelProvider(requireActivity()).get(QuestionViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewmodel = ViewModelProvider(requireActivity()).get(QuestionViewModel::class.java)
-        viewmodel.allQuestion.observe(requireActivity(), Observer { list -> list?.let {
-            Log.d("TAG", it[3].question.toString())
-        } })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewmodel.nextQuestion.observe(viewLifecycleOwner){
+            Log.d("TAG", it.toString())
+        }
     }
 }

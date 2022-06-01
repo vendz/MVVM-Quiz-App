@@ -6,6 +6,7 @@ import com.vandit.mvvmquizapp.models.QuestionsModel
 
 class QuestionsRepository(private val questionsDao: QuestionsDao) {
     val allQuestions: LiveData<List<QuestionsModel>> = questionsDao.getAllQuestions()
+    val nextQuestion: LiveData<QuestionsModel> = questionsDao.getNextQuestion()
 
     suspend fun insert(questionsModel: QuestionsModel){
         questionsDao.insertQuestion(questionsModel)
@@ -17,5 +18,9 @@ class QuestionsRepository(private val questionsDao: QuestionsDao) {
 
     suspend fun update(questionsModel: QuestionsModel){
         questionsDao.updateQuestion(questionsModel)
+    }
+
+    suspend fun deleteAll(){
+        questionsDao.deleteAllQuestions()
     }
 }

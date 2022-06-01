@@ -5,12 +5,18 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "questionsTable")
 data class QuestionsModel (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int?,
     val question: String?,
     var answer: String?,
     var option_a: String?,
     var option_b: String?,
     var option_c: String?,
-    var option_d: String?
-)
+    var option_d: String?,
+    var isCorrect: Boolean? = false,
+    var isAttempted: Boolean? = false
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null
+    override fun toString(): String {
+        return "$question $answer"
+    }
+}
