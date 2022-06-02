@@ -34,7 +34,7 @@ class QuestionViewModel(application: Application): AndroidViewModel(application)
         repository.delete(question)
     }
 
-    fun deleteAllQuestions() = viewModelScope.launch {
+    fun deleteAllQuestions() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
     }
 }
