@@ -1,6 +1,7 @@
 package com.vandit.mvvmquizapp.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.vandit.mvvmquizapp.models.QuestionsModel
 
@@ -19,7 +20,7 @@ interface QuestionsDao {
     fun getAllQuestions(): LiveData<List<QuestionsModel>>
 
     @Query("SELECT * FROM questionsTable WHERE isAttempted = 0 ORDER by id LIMIT 1")
-    fun getNextQuestion(): LiveData<QuestionsModel>
+    suspend fun getNextQuestion(): QuestionsModel
 
     @Query("DELETE FROM questionsTable")
     suspend fun deleteAllQuestions()

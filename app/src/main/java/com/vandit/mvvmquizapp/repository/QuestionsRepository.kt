@@ -1,12 +1,12 @@
 package com.vandit.mvvmquizapp.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.vandit.mvvmquizapp.database.QuestionsDao
 import com.vandit.mvvmquizapp.models.QuestionsModel
 
 class QuestionsRepository(private val questionsDao: QuestionsDao) {
     val allQuestions: LiveData<List<QuestionsModel>> = questionsDao.getAllQuestions()
-    val nextQuestion: LiveData<QuestionsModel> = questionsDao.getNextQuestion()
 
     suspend fun insert(questionsModel: QuestionsModel){
         questionsDao.insertQuestion(questionsModel)
@@ -22,5 +22,9 @@ class QuestionsRepository(private val questionsDao: QuestionsDao) {
 
     suspend fun deleteAll(){
         questionsDao.deleteAllQuestions()
+    }
+
+    suspend fun getNextQuestion(): QuestionsModel {
+        return questionsDao.getNextQuestion()
     }
 }
