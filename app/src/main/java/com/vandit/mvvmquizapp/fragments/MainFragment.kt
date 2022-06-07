@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.vandit.mvvmquizapp.R
 import com.vandit.mvvmquizapp.databinding.FragmentMainBinding
-import com.vandit.mvvmquizapp.models.QuestionsModel
 import com.vandit.mvvmquizapp.viewmodel.QuestionViewModel
 import java.util.*
 
@@ -40,6 +39,11 @@ class MainFragment : Fragment() {
 
     fun onButtonPress(v: View) {
         viewmodel.getNextQuestion()
-        Log.d("TAG", "Hello GM")
+        binding.submitBtn.visibility = View.GONE
+    }
+
+    fun onOptionButtonPress(v: View){
+        viewmodel.verifyAnswer(v)
+        binding.submitBtn.visibility = View.VISIBLE
     }
 }
